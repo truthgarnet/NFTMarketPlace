@@ -11,3 +11,6 @@ yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest
 
 tailwindcss => bootstrap 과 비슷
 npx tailwindcss init -p
+
+Home
+![image](https://user-images.githubusercontent.com/57488270/150742013-41918e9f-ec6b-4bbc-aab0-7161ec0b0084.png)
