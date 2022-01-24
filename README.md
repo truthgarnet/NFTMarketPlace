@@ -1,15 +1,13 @@
-# Basic Sample Hardhat Project
+## Opensea-Clone
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+### 환경설정
+solidity, openzeppelin, hardhat
+next.js, tailwind
 
-Try running some of the following tasks:
+### 초기설정
+yarn add ethers hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers web3modal @openzeppelin/contracts ipfs-http-client axios
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest
+
+tailwindcss => bootstrap 과 비슷
+npx tailwindcss init -p
