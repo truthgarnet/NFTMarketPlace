@@ -25,11 +25,11 @@ module.exports = {
       chainId: 1337 //If it hasn't other chainid, You can change chainId
     },
     mumbai: {
-      url: 'https://polygon-mumbai.infura.io/v3/${projectId}', //Infura
+      url: `https://polygon-mumbai.infura.io/v3/${projectId}`, //Infura
       accounts: [privateKey]
     },
     mainnet: {
-      url: 'https://polygon-mainnet.infura.io/v3/${projectId}', //Infura
+      url: `https://polygon-mainnet.infura.io/v3/${projectId}`, //Infura
       accounts: [privateKey]
     },
   },
