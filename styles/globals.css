@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+a.current{
+   background-color: black;
+}
+
+a:hover:not(.currnet){
+   color: #e44a2f;
+}
+
+img{
+   max-height: 100%;
+   max-width: 100%;
+   width: 600px;
+   height: 400px;
+   background-size: 100%;
+}
