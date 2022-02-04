@@ -1,19 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
 
-a.current{
-   background-color: black;
+a, p {
+   font-family: 'East Sea Dokdo', cursive;
+}
+a:hover:not(.currnet){
+   color: gray;
 }
 
-a:hover:not(.currnet){
-   color: #e44a2f;
+#nav{
+   background-image: url("../public/home/Banner.png");
+}
+
+footer{
+   background-image: url("../public/home/Banner.png");
+   color: black;
+}
+
+#wrapper{
+   min-height: 100%;
 }
 
 img{
-   max-height: 100%;
-   max-width: 100%;
-   width: 600px;
-   height: 400px;
-   background-size: 100%;
+   height: 300px;
 }

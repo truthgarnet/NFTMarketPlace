@@ -20,10 +20,10 @@ export default function CreatorDashboard() {
   }, [])
   async function loadNFTs() {
     const web3Modal = new Web3Modal(
-    //     {
-    //   network: "mainnet",
-    //   cacheProvider: true,
-    // }
+        {
+      network: "mainnet",
+      cacheProvider: true,
+    }
     )
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
@@ -57,7 +57,7 @@ export default function CreatorDashboard() {
   return (
     <div>
       <div className="p-4">
-        <h2 className="text-2xl py-2">Items Created</h2>
+        <h2 className="text-2xl py-2 font-mono font-semibold">Items Created</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
@@ -68,10 +68,10 @@ export default function CreatorDashboard() {
                             src={nft.image}
                             alt="Picture of the author"
                             className="rounded"
-                            width={250}
+                            width={400}
                             height={300} 
-                            // blurDataURL="data:..." automatically provided
-                            // placeholder="blur" // Optional blur-up while loading
+                            blurDataURL="data:..." automatically provided
+                            placeholder="blur" // Optional blur-up while loading
                           />
 
                 <div className="p-4 bg-black">
@@ -82,11 +82,13 @@ export default function CreatorDashboard() {
           }
         </div>
       </div>
+        <br/>
         <div className="px-4">
+        <hr/>
         {
           Boolean(sold.length) && (
             <div>
-              <h2 className="text-2xl py-2">Items sold</h2>
+              <h2 className="text-2xl py-2 font-mono font-semibold">Items sold</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                 {
                   sold.map((nft, i) => (
