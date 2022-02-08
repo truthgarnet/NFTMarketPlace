@@ -1,4 +1,4 @@
-## Opensea-Clone
+## NFTMarketPlace
 
 ### 환경설정
 solidity, openzeppelin, hardhat
