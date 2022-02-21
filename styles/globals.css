@@ -3,19 +3,11 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap');
 
-a, p {
-   font-family: 'East Sea Dokdo', cursive;
-}
-a:hover:not(.currnet){
-   color: gray;
-}
-
-#nav{
-   background-image: url("../public/home/Banner.png");
+img{
+   height: 300px;
 }
 
 footer{
-   background-image: url("../public/home/Banner.png");
    color: black;
 }
 
@@ -23,6 +15,6 @@ footer{
    min-height: 100%;
 }
 
-img{
-   height: 300px;
+a {
+   font-size: 18px;
 }

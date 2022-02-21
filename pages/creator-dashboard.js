@@ -18,6 +18,8 @@ export default function CreatorDashboard() {
   useEffect(() => {
     loadNFTs()
   }, [])
+
+  
   async function loadNFTs() {
     const web3Modal = new Web3Modal(
         {
@@ -32,11 +34,14 @@ export default function CreatorDashboard() {
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const data = await marketContract.fetchItemsCreated()
-    
+  
+  
     const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
+      
+      console.log(txHash);
       let item = {
         price,
         tokenId: i.tokenId.toNumber(),

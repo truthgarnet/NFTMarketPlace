@@ -14,7 +14,7 @@ contract NFTMarket is ReentrancyGuard {
    address payable owner; //owner of the smart contract 
 
    //people have to pay to put their NFT on this marketPrice
-   uint256 listingPrice = 0.025 ether; 
+   uint256 listingPrice = 0.015 ether; 
 
    constructor(){
       owner = payable(msg.sender);

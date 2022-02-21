@@ -3,37 +3,123 @@ import Link from 'next/link'
 import Image from "next/image";
 
 function MyApp({ Component, pageProps }) {
+
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+        //Polygon Network
+        /*
+        window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: "0x89", // 137
+            chainName: "Matic(Polygon) Mainnet",
+            nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
+            rpcUrls: ["https://polygon-rpc.com"],
+            blockExplorerUrls: ["https://www.polygonscan.com/"],
+          }]
+        });
+        */
+
+        window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [{
+            chainId: "0x13881", // 80001
+            chainName: "Matic(Polygon) Testnet",
+            nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
+            rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+            blockExplorerUrls: ["https://mumbai-explorer.matic.today/"],
+          }]
+        });
+      } catch (error) {
+        return {
+          error: 'An unexpected error occurs',
+          message: 'Please check if Network is added to your metamask'
+        };
+
+      }
+    }
+  };
+
+
+  async function onChange(e) {
+    const file = e.target.files[0]
+    try { //try uploading the file
+      const added = await client.add(
+        file,
+        {
+          progress: (prog) => console.log(`received: ${prog}`)
+        }
+      )
+      //file saved in the url path below
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      setFileUrl(url)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  //first create Ground
+  async function createGround() {
+    const { location, price, type } = formInput;
+
+    if (!type || !price || !location) {
+      return;
+    }
+
+    const data = JSON.stringify({
+      type, image: fileUrl
+    });
+    try {
+      const added = await client.add(data);
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      //pass the url to save it on Polygon  it has been uploaded to IPFS
+      createSale(url);
+    } catch (error) {
+      console.log('Error uploading file: ', error);
+    }
+  }
+
+
   return (
     <div id='wrapper'>
       <nav className="border-b p-6 font-mono text-3xl" id='nav'>
         <div className='flex mt-4'>
-          <Link href='/'>
-            <a className='mr-8 ml-8 text-blue-50'>포켓티</a>
-          </Link>
-          <Link href='/create-item'>
-            <a className='mr-6 text-black-500'>만들기</a>
-          </Link>
-          <Link href='/my-assets'>
-            <a className='mr-6 text-black-500'>마이페이지</a>
-          </Link>
-          <Link href='/creator-dashboard'>
-            <a className='mr-6 text-black-500'>대쉬보드</a>
-          </Link>
-          <Link href='/help'>
-            <a className='mr-6 text-black-500'>도움</a>
-          </Link>
-          <Link href='/log-out'>
-            <a className='mr-6 text-black-500'>로그아웃</a>
-          </Link>
+
+          <h3 className='absolute left-0 top-0 h-16 pl-6 pt-7'>포켓티</h3>
+
+          <div className='absolute top-0 right-0 h-16 pr-6 pt-7 '>
+            <button /*</div>onClick={langauge}*/ className='pr-5'>언어</button>
+            <button onClick={connectWallet}>로그인</button>
+          </div>
         </div>
       </nav>
+      <div className='border-b' id="nav2">
+        <Link href='/'>
+          <a className='ml-6 mr-6 text-black-500'>홈</a>
+        </Link>
+        <Link href='/create-item'>
+          <a className='mr-6 text-black-500'>만들기</a>
+        </Link>
+        <Link href='world-map'>
+          <a className='mr-6 text-black-500'>월드 맵</a>
+        </Link>
+        <Link href='/my-assets'>
+          <a className='mr-6 text-black-500'>마이페이지</a>
+        </Link>
+      </div>
+
       <Component {...pageProps} />
 
-      <footer id='footer'>
-        <p>회사 포켓메모리</p>
-        <p>서울특별시 영등포구 문래동3가 82-12 자율빌딩 5층, 6층</p>
-        <p>대표 조용석 | 사업자등록번호 107-88-22036</p>
-        <p>© 2021 Pocket Memory Co.,Ltd. All Rights Reserved.</p>
+      <footer className='bg-black'>
+        <div className='text-white'>
+          <p>회사 포켓메모리</p>
+          <p>서울특별시 영등포구 문래동3가 82-12 자율빌딩 5층, 6층</p>
+          <p>대표 조용석 | 사업자등록번호 107-88-22036</p>
+          <p>© 2021 Pocket Memory Co.,Ltd. All Rights Reserved.</p>
+        </div>
       </footer>
     </div>
 

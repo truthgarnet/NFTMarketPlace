@@ -15,7 +15,7 @@ import Image from 'next/image';
 
 export default function CreateItem() {
    const [fileUrl, setFileUrl] = useState(null);
-   const [formInput, updateFormInput] = useState({price: '', name: '', descrption: ''});
+   const [formInput, updateFormInput] = useState({price: '', cityName: '', cityType: ''});
    const router = useRouter();
 
    async function onChange(e) {
@@ -37,15 +37,15 @@ export default function CreateItem() {
 
    //1. create item (image/video) and upload to ipfs
    async function createItem(){
-      const {name, descrption, price} = formInput; //get the vaule from the form input
+      const {cityName, cityType, price} = formInput; //get the vaule from the form input
 
       //form validation 
-      if(!name || !descrption || !price || !fileUrl) {
+      if(!cityName || !cityType || !price || !fileUrl) {
          return 
          }
 
       const data = JSON.stringify({
-            name, descrption, image: fileUrl
+            cityName, cityType, image: fileUrl
          });
 
       try{
@@ -69,6 +69,7 @@ export default function CreateItem() {
       let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
       let transaction = await contract.createToken(url)
       let tx = await transaction.wait()
+      console.log(tx.transactionHash);
 
       //get the tokenId from the transaction that occured above
       //there events array that is returned, the first item from that event
@@ -98,24 +99,24 @@ export default function CreateItem() {
       <div className="flex justify-center">
          <div className="w-1/2 flex flex-col pb-12">
             <input 
-               placeholder="Asset Name"
+               placeholder="Asset cityName"
                className="mt-8 border rounded p-4"
-               onChange={e => updateFormInput({...formInput, name: e.target.value})}
+               onChange={e => updateFormInput({...formInput, cityName: e.target.value})}
                />
             <textarea
                placeholder="Asset description"
                className="mt-2 border rounded p-4"
-               onChange={e => updateFormInput({...formInput, descrption: e.target.value})}
+               onChange={e => updateFormInput({...formInput, cityType: e.target.value})}
                />
             <input 
                placeholder="Asset Price in Eth"
                className="mt-8 border rounded p-4"
-               type="number"
+               cityType="number"
                onChange={e => updateFormInput({...formInput, price: e.target.value})}
                />
             <input
-               type="file"
-               name="Asset"
+               cityType="file"
+               cityName="Asset"
                className="mt-4"
                onChange={onChange}
                />
