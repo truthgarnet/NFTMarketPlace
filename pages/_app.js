@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import Link from 'next/link'
-import Image from "next/image";
 
 function MyApp({ Component, pageProps }) {
 
@@ -23,6 +22,7 @@ function MyApp({ Component, pageProps }) {
         });
         */
 
+        //예외 처리해주기
         window.ethereum.request({
           method: "wallet_addEthereumChain",
           params: [{
@@ -34,55 +34,16 @@ function MyApp({ Component, pageProps }) {
           }]
         });
       } catch (error) {
-        return {
+        return{
           error: 'An unexpected error occurs',
-          message: 'Please check if Network is added to your metamask'
+          message: 'Please check if Network is added to your metamask',
+          
         };
-
       }
     }
   };
 
-
-  async function onChange(e) {
-    const file = e.target.files[0]
-    try { //try uploading the file
-      const added = await client.add(
-        file,
-        {
-          progress: (prog) => console.log(`received: ${prog}`)
-        }
-      )
-      //file saved in the url path below
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
-      setFileUrl(url)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  //first create Ground
-  async function createGround() {
-    const { location, price, type } = formInput;
-
-    if (!type || !price || !location) {
-      return;
-    }
-
-    const data = JSON.stringify({
-      type, image: fileUrl
-    });
-    try {
-      const added = await client.add(data);
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
-      //pass the url to save it on Polygon  it has been uploaded to IPFS
-      createSale(url);
-    } catch (error) {
-      console.log('Error uploading file: ', error);
-    }
-  }
-
-
+  
   return (
     <div id='wrapper'>
       <nav className="border-b p-6 font-mono text-3xl" id='nav'>
@@ -103,7 +64,7 @@ function MyApp({ Component, pageProps }) {
         <Link href='/create-item'>
           <a className='mr-6 text-black-500'>만들기</a>
         </Link>
-        <Link href='world-map'>
+        <Link href='/world-map'>
           <a className='mr-6 text-black-500'>월드 맵</a>
         </Link>
         <Link href='/my-assets'>

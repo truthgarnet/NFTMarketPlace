@@ -12,7 +12,7 @@ import {
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../artifacts/contracts/NFTMarket.sol/NFTMarket.json';
 
-export default function MyAssets() {
+export default function MyAssets(props) {
    const [nfts, setNfts] = useState([])
    const [loadingState, setLoadingState] = useState('not-loaded')
 
@@ -20,7 +20,6 @@ export default function MyAssets() {
       loadNFTs()
    }, [])
    
-
    async function loadNFTs() {
       // const webM3odal = new Web3Modal({
       //    network: "mainnet",
@@ -28,7 +27,7 @@ export default function MyAssets() {
       // })
 
       const web3Modal = new Web3Modal()
-
+      
       const connection = await web3Modal.connect()
       const provider = new ethers.providers.Web3Provider(connection)
       const signer = provider.getSigner()
@@ -36,28 +35,28 @@ export default function MyAssets() {
       const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
       const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
       const data = await marketContract.fetchMyNFTs()
-
-
-      const address =  await window.ethereum.request({
-         method: "eth_accounts",
-       });
-      const account = address[0];
-
+      
+      
       const items = await Promise.all(data.map(async i => {
          const tokenUri = await tokenContract.tokenURI(i.tokenId)
          const meta = await axios.get(tokenUri)
-        
+         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+         const account = accounts[0];
          let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
+         const cityName = i.cityName   
+
          let item = {
             price,
             tokenId: i.tokenId.toNumber(),
             seller: i.seller,
             owner: i.owner,
             image: meta.data.image,
+            account: account,
+            cityName: meta.data.cityName
          }
          return item
       }))
-      setAccounts(info)
+      
       setNfts(items)
       setLoadingState('loaded')
    }
@@ -75,7 +74,12 @@ export default function MyAssets() {
                />
             </div>
             <div className="col-span-3 flex justify-center">
-               
+               {
+                  //한개만 받기
+                  nfts.map((nft, i) => (
+                     <div key={i}>{nft.account}</div>
+                  ))
+               }
             </div>
 
             <div>
@@ -84,7 +88,6 @@ export default function MyAssets() {
                   {
                      nfts.map((nft, i) => (
                         <div key={i} className="border shadow rounded-xl overflow-hidden">
-
                            <Image
                               src={nft.image}
                               alt="Picture of the author"
@@ -93,7 +96,7 @@ export default function MyAssets() {
                               height={300}
                            />
                            <div className="p-4 bg-black">
-                              <p className="text-2xl font-bold text-white">{nft.price}</p>
+                              <p className="text-2xl mb-4 font-bold text-white">{nft.cityName}</p>
                            </div>
                         </div>
                      ))

@@ -57,7 +57,7 @@ contract NFTMarket is ReentrancyGuard {
    } 
 
    /// @notice function to create market item
-   function createMarketItem(address nftContract, uint256 tokenId, uint256 price) public payable nonReentrant{
+   function createGround(address nftContract, uint256 tokenId, uint256 price) public payable nonReentrant{
       require(price > 0, "Price must be above zero");
       require(msg.value == listingPrice, "Price use be equal to listing price");
       

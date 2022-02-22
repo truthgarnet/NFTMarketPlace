@@ -52,6 +52,7 @@ export default function CreateItem() {
             const added = await client.add(data);
             const url = `https://ipfs.infura.io/ipfs/${added.path}`
             //pass the url to save it on Polygon  it has been uploaded to IPFS
+            console.log(cityName, cityType, price);
             createSale(url);
          }catch(error) {
             console.log('Error uploading file: ', error);
@@ -87,7 +88,7 @@ export default function CreateItem() {
       let listingPrice = await contract.getListingPrice()
       listingPrice = listingPrice.toString()
 
-      transaction = await contract.createMarketItem(
+      transaction = await contract.createGround(
          nftaddress, tokenId, price, {value: listingPrice }
       )
 
@@ -99,24 +100,24 @@ export default function CreateItem() {
       <div className="flex justify-center">
          <div className="w-1/2 flex flex-col pb-12">
             <input 
-               placeholder="Asset cityName"
+               placeholder="cityName"
                className="mt-8 border rounded p-4"
                onChange={e => updateFormInput({...formInput, cityName: e.target.value})}
                />
             <textarea
-               placeholder="Asset description"
+               placeholder="cityType"
                className="mt-2 border rounded p-4"
                onChange={e => updateFormInput({...formInput, cityType: e.target.value})}
                />
             <input 
-               placeholder="Asset Price in Eth"
+               placeholder="Price in Eth"
                className="mt-8 border rounded p-4"
-               cityType="number"
+               type="number"
                onChange={e => updateFormInput({...formInput, price: e.target.value})}
                />
             <input
-               cityType="file"
-               cityName="Asset"
+               type="file"
+               name="Asset"
                className="mt-4"
                onChange={onChange}
                />
