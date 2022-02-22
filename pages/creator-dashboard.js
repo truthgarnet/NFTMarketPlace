@@ -32,6 +32,7 @@ export default function CreatorDashboard() {
     const signer = provider.getSigner()
       
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+    const CityContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const data = await marketContract.fetchItemsCreated()
   
@@ -67,8 +68,6 @@ export default function CreatorDashboard() {
           {
             nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-               
-
                         <Image
                             src={nft.image}
                             alt="Picture of the author"
