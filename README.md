@@ -4,6 +4,8 @@
 **solidity**, **openzeppelin**, **hardhat**
 **next.js**, **tailwind**
 
+<br>
+
 ### 초기설정
 ```yarn add ethers hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers web3modal @openzeppelin/contracts ipfs-http-client axios tailwindcss@latest postcss@latest autoprefixer@latest```
 
@@ -12,13 +14,16 @@
 tailwindcss => bootstrap 과 비슷
 npx tailwindcss init -p
 
+<br>
 
 ### 실행
 ```npx run dev ```
 
+<br>
+
 ### 결과물
 
-<br>
+
 
 #### Home
 <img src ="https://user-images.githubusercontent.com/57488270/150742013-41918e9f-ec6b-4bbc-aab0-7161ec0b0084.png" width="500px" height="500px">
