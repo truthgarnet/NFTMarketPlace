@@ -7,7 +7,9 @@
 <br>
 
 ### 초기설정
-```yarn add ethers hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers web3modal @openzeppelin/contracts ipfs-http-client axios tailwindcss@latest postcss@latest autoprefixer@latest```
+```
+yarn add ethers hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers web3modal @openzeppelin/contracts ipfs-http-client axios tailwindcss@latest postcss@latest autoprefixer@latest
+```
 
 
 
