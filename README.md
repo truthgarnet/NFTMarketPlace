@@ -20,6 +20,7 @@ npx tailwindcss init -p
 <br>
 
 ### 실행
+```npm install ```
 ```npx run dev ```
 
 <br>
